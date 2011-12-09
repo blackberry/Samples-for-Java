@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/net.rim.ejde.BlackBerryVMInstallType/BlackBerry JRE 7.0.0"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/twindsor/Downloads/AnalyticsService_v1.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
