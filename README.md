@@ -1,6 +1,6 @@
 # BlackBerry Samples for Java Repository 
 
-The _**BlackBerry-Java**_ repository is an area where members of the community can post up their BlackBerry Java sample applications to share with the rest of the world.  
+The _**Samples-for-Java**_ repository is an area where members of the community can post up their BlackBerry Java sample applications to share with the rest of the world.  
 
 All APIs shared in this repository are Open Source under the  [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html)
 
@@ -17,9 +17,9 @@ This README needs to indicate the Author of the API, devices and OS versions it 
 
 To add new Samples or make modifications to existing Samples:
 
-1. Fork the **BlackBerry-Java** repository
+1. Fork the **Samples-for-Java** repository
 2. Make the changes/additions to your fork
-3. Send a pull request from your fork back to the **BlackBerry-Java** repository
+3. Send a pull request from your fork back to the **Samples-for-Java** repository
 4. If you made changes to code which you are NOT the owner, send a message via github messages to the Author(s) of the Sample to indicate that you have a pull request for them to review
 5. If you made changes to code which you own, send a message via github messages to one of the Committers listed below to have your code merged
 
@@ -34,7 +34,7 @@ the pull request and indicate that it is ready to be merged before the pull requ
 If the Author of the pull request is the actual owner of the Sample, then the Author should send a message to a committer via github messages to have their changes merged.
 
 **Ownership Transfer:**
-An Author can transfer ownership to another Author by opening up an [Issue](https://github.com/blackberry/BlackBerry-Java/issues) where both the original Author requests ownership to be transfered to the new Author, and the new Author agrees to take ownership of the code.  
+An Author can transfer ownership to another Author by opening up an [Issue](https://github.com/blackberry/Samples-for-Java/issues) where both the original Author requests ownership to be transfered to the new Author, and the new Author agrees to take ownership of the code.  
 The README for the Sample should be updated to indicate the new Author.
 
 **Repository Committers** 
@@ -44,7 +44,7 @@ The README for the Sample should be updated to indicate the new Author.
 
 ## Bug Reporting and Feature Requests
 
-If you find a bug in a Sample, or have an enhancement request, simply file an [Issue](https://github.com/blackberry/BlackBerry-Java/issues) for the Sample and send a message (via github messages) to the Sample Author(s) to let them know that you have filed an [Issue](https://github.com/blackberry/BlackBerry-Java/issues).
+If you find a bug in a Sample, or have an enhancement request, simply file an [Issue](https://github.com/blackberry/Samples-for-Java/issues) for the Sample and send a message (via github messages) to the Sample Author(s) to let them know that you have filed an [Issue](https://github.com/blackberry/Samples-for-Java/issues).
 
 ## Disclaimer
 

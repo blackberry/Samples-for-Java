@@ -67,7 +67,7 @@ Title: Displays a label using the BannerFont.
  
 TitleBar: Preprocessor based class that extends from Banner or StandardTitleBar depending on SDK.
  
-WirelessStatus: Displays cellular signal strength, with or without network type (3G, EDGE, 1XEV, etc), or Wi-Fi®? signal strength. Can shrink or maintain size based on boolean provided at creation. Call setDisplaySetting() with one of the following constants to change it's appearance:
+WirelessStatus: Displays cellular signal strength, with or without network type (3G, EDGE, 1XEV, etc), or Wi-Fi&reg;? signal strength. Can shrink or maintain size based on boolean provided at creation. Call setDisplaySetting() with one of the following constants to change it's appearance:
 DISPLAY_FULL - Both Descriptor and signal strength
 DISPLAY_SIGNAL - Signal strength image only
 DISPLAY_DESCRIPTOR - Descriptor only (1X, 1XEV, EDGE, 3G, NEXT, etc)
@@ -84,12 +84,12 @@ If desired, any of the fields can be added to a Manager like any UI component.
 
 ## Contributing Changes
 
-Please see the [README](https://github.com/blackberry/BlackBerry-Java) of the BlackBerry-Java repository for instructions on how to add new Samples or make modifications to existing Samples.
+Please see the [README](https://github.com/blackberry/Samples-for-Java) of the Samples-for-Java repository for instructions on how to add new Samples or make modifications to existing Samples.
 
 
 ## Bug Reporting and Feature Requests
 
-If you find a bug in a Sample, or have an enhancement request, simply file an [Issue](https://github.com/blackberry/BlackBerry-Java/issues) for the Sample and send a message (via github messages) to the Sample Author(s) to let them know that you have filed an [Issue](https://github.com/blackberry/BlackBerry-Java/issues).
+If you find a bug in a Sample, or have an enhancement request, simply file an [Issue](https://github.com/blackberry/Samples-for-Java/issues) for the Sample and send a message (via github messages) to the Sample Author(s) to let them know that you have filed an [Issue](https://github.com/blackberry/Samples-for-Java/issues).
 
 
 ## Disclaimer

@@ -1,6 +1,6 @@
 # BlackBerry Analytics Sample
 
-This is the same sample application that is included in the Analytics SDK package. It is open sourced here so that it can be extended and used by the community. 
+This is the same sample application that is included in the [Analytics SDK](http://us.blackberry.com/developers/platform/analyticsservice/) package. It is open sourced here so that it can be extended and used by the community. 
 
 The sample code for this application is Open Source under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
 
@@ -26,12 +26,12 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 
 ## Contributing Changes
 
-Please see the [README](https://github.com/blackberry/BlackBerry-Java) of the BlackBerry-Java repository for instructions on how to add new Samples or make modifications to existing Samples.
+Please see the [README](https://github.com/blackberry/Samples-for-Java) of the Samples-for-Java repository for instructions on how to add new Samples or make modifications to existing Samples.
 
 
 ## Bug Reporting and Feature Requests
 
-If you find a bug in a Sample, or have an enhancement request, simply file an [Issue](https://github.com/blackberry/BlackBerry-Java/issues) for the Sample and send a message (via github messages) to the Sample Author(s) to let them know that you have filed an [Issue](https://github.com/blackberry/BlackBerry-Java/issues).
+If you find a bug in a Sample, or have an enhancement request, simply file an [Issue](https://github.com/blackberry/Samples-for-Java/issues) for the Sample and send a message (via github messages) to the Sample Author(s) to let them know that you have filed an [Issue](https://github.com/blackberry/Samples-for-Java/issues).
 
 
 ## Disclaimer
