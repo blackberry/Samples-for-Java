@@ -20,8 +20,7 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 
 **Dependencies**
 
-1. BlackBerry Java SDK 6.0.0 or higher required.
-2. Youtube Data API 2.0
+1. BlackBerry Java SDK 5.0.0 or higher required.
 
 
 
