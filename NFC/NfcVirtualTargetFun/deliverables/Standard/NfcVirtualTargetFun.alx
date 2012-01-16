@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="NfcVirtualTargetFun">
+		<name >
+			NFC Virtual Target Fun
+		</name>
+		<description >
+			Fun with Virtual Targets
+		</description>
+		<version >
+			1.0.4
+		</version>
+		<vendor >
+			John Murray
+		</vendor>
+		<copyright >
+			Copyright (c) 2012 John Murray
+		</copyright>
+		<fileset Java="1.54" _blackberryVersion="[7.0.0)">
+			<directory >
+				7.0.0
+			</directory>
+			<files >
+				NfcVirtualTargetFun.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>
