@@ -16,6 +16,8 @@
 
 package mypackage;
 
+import java.util.TimeZone;
+
 import net.rim.device.api.system.ApplicationDescriptor;
 import net.rim.device.api.system.CodeModuleManager;
 
@@ -68,7 +70,7 @@ public class MyApp extends WebtrendsUiApplication {
 		}
 
 		public String wt_dc_timezone() {
-			return "-5";
+			return Integer.toString(TimeZone.getDefault().getRawOffset());
 		}
 
 		public String wt_dc_app_category() {
