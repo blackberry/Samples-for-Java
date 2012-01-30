@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="NfcSnepResponder">
+		<name >
+			NFC vCard Responder
+		</name>
+		<description >
+			vCard Responder using the SNEP protocol
+		</description>
+		<version >
+			1.0.1
+		</version>
+		<vendor >
+			John Murray
+		</vendor>
+		<copyright >
+			Copyright (c) 2012 John Murray
+		</copyright>
+		<fileset Java="1.54" _blackberryVersion="[7.1.0)">
+			<directory >
+				7.1.0
+			</directory>
+			<files >
+				NfcSnepResponder.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>
