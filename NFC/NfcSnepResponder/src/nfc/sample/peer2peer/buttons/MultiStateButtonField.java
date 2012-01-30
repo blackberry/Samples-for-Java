@@ -1,3 +1,5 @@
+
+package nfc.sample.peer2peer.buttons;
 /*
 * Copyright (c) 2012 Research In Motion Limited.
 *
@@ -13,8 +15,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package nfc.sample.peer2peer.buttons;
-
 import net.rim.device.api.command.AlwaysExecutableCommand;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;

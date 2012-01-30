@@ -1,3 +1,5 @@
+
+package nfc.sample.peer2peer.ui;
 /*
 * Copyright (c) 2012 Research In Motion Limited.
 *
@@ -13,8 +15,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-package nfc.sample.peer2peer.ui;
-
 import net.rim.device.api.ui.Graphics;
 import net.rim.device.api.ui.component.ListField;
 import net.rim.device.api.ui.component.ObjectListField;
