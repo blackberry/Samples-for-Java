@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="NfcWriteNdefSmartTag">
+		<name >
+			Write NDEF Smart Tag
+		</name>
+		<description >
+			Write an NDEF Smart Tag using NFC
+		</description>
+		<version >
+			1.0.6
+		</version>
+		<vendor >
+			John Murray
+		</vendor>
+		<copyright >
+			Copyright (c) 2012 John Murray
+		</copyright>
+		<fileset Java="1.54" _blackberryVersion="[7.1.0)">
+			<directory >
+				7.1.0
+			</directory>
+			<files >
+				NfcWriteNdefSmartTag.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>
