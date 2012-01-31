@@ -1,0 +1,17 @@
+MIDlet-Name: NfcWriteNdefSmartTag
+MIDlet-Version: 1.0.6
+MIDlet-Vendor: John Murray
+MIDlet-Jar-URL: NfcWriteNdefSmartTag.jar
+MIDlet-Jar-Size: 148577
+MIDlet-Description: Write an NDEF Smart Tag using NFC
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: Write NDEF Smart Tag,img/SmartTag_Logo.png,
+RIM-MIDlet-Flags-1: 0
+Manifest-Version: 1.0
+RIM-COD-URL: NfcWriteNdefSmartTag.cod
+RIM-COD-Size: 33236
+RIM-COD-Creation-Time: 1328001108
+RIM-COD-Module-Name: NfcWriteNdefSmartTag
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_nfc
+RIM-COD-SHA1: 18 85 e6 ad ad 93 b4 ef 82 b4 96 41 5e 4a aa e7 8d 6e c1 74
