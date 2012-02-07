@@ -39,8 +39,8 @@ public class UIExampleNegativeMarginScreen extends UIExampleScreen
         
         _foreground = new NegativeMarginVerticalFieldManager( USE_ALL_WIDTH | USE_ALL_HEIGHT | VERTICAL_SCROLL );
         
-        Border rightBorder = BorderFactory.createBitmapBorder( new XYEdges( 16, 23, 27, 16 ), Bitmap.getBitmapResource( "bubble_right.png" ) );
-        Border leftBorder = BorderFactory.createBitmapBorder( new XYEdges( 16, 16, 27, 23 ), Bitmap.getBitmapResource( "bubble_left.png" ) );
+        Border rightBorder = BorderFactory.createBitmapBorder( new XYEdges( 16, 23, 27, 16 ), Bitmap.getBitmapResource( "border_bubble_right.png" ) );
+        Border leftBorder = BorderFactory.createBitmapBorder( new XYEdges( 16, 16, 27, 23 ), Bitmap.getBitmapResource( "border_bubble_left.png" ) );
         
         addHeading( "See how the bottom of the bubbles overlap the top of the next bubble?", leftBorder, Field.FIELD_LEFT );
         addHeading( "Yeah, I see it", rightBorder, Field.FIELD_RIGHT );
