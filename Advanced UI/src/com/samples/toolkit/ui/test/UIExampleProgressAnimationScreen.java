@@ -37,17 +37,13 @@ public class UIExampleProgressAnimationScreen extends UIExampleScreen
         
         add( spinners );
         
-        Bitmap progressBitmap = Bitmap.getBitmapResource( "progress.png" );
-        ProgressAnimationField example = new ProgressAnimationField( progressBitmap, 4, Field.FIELD_HCENTER );
         LabelField exampleLabel = new LabelField( "The progress / spinner fields are created using a single image that has different frames in it. You pass in the image, and the number of equal size horizontal frames. It will take care of the animation." );
         exampleLabel.setMargin( 10, 10, 10, 10 );
-    
         add( exampleLabel );
         
-        EvenlySpacedHorizontalFieldManager spinners2 = new EvenlySpacedHorizontalFieldManager( USE_ALL_WIDTH );
-        addSpinner( spinners2, example );
-        addSpinner( spinners2, new BitmapField( progressBitmap ) );
-        add( spinners2 );
+        BitmapField allFrames = new BitmapField( Bitmap.getBitmapResource( "spinner.png" ), Field.FIELD_HCENTER );
+        allFrames.setMargin( 10, 10, 10, 10 );
+        add( allFrames );
     }
     
     private void addSpinner( Manager parent, Field spinner )
@@ -56,4 +52,7 @@ public class UIExampleProgressAnimationScreen extends UIExampleScreen
         parent.add( spinner );
     }
 }
+
+
+
 

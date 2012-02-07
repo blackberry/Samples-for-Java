@@ -22,459 +22,386 @@ import java.lang.Math;
 
 import net.rim.device.api.system.*;
 import net.rim.device.api.ui.*;
+import net.rim.device.api.util.*;
 
 public class SliderField extends Field
 {
-    Bitmap _imageThumb;
+    private final static int STATE_NORMAL  = 0;
+    private final static int STATE_FOCUSED = 1;
+    private final static int STATE_PRESSED = 2;
     
-    Bitmap _imageSlider;
-    Bitmap _imageSliderLeft;
-    Bitmap _imageSliderCenter;
-    Bitmap _imageSliderRight;
+    private final static int NUM_STATES    = 3;
     
-    Bitmap _imageSliderFocus;
-    Bitmap _imageSliderFocusLeft;
-    Bitmap _imageSliderFocusCenter;
-    Bitmap _imageSliderFocusRight;
 
-    private int _numStates;
-    private int _currentState;
-    private boolean _selected;
+    private Bitmap[] _thumb        = new Bitmap[ NUM_STATES ];
+    private Bitmap[] _progress     = new Bitmap[ NUM_STATES ];
+    private Bitmap[] _base         = new Bitmap[ NUM_STATES ];
+    private Bitmap[] _progressTile = new Bitmap[ NUM_STATES ];
+    private Bitmap[] _baseTile     = new Bitmap[ NUM_STATES ];
 
-    private int _xLeftBackMargin;
-    private int _xRightBackMargin;
-    
     private int _thumbWidth;
     private int _thumbHeight;
-        
-    private int _totalHeight;
-    private int _totalWidth;
+    private int _progressWidth;
+    private int _progressHeight;
+    private int _baseWidth;
+    private int _baseHeight;
     
-    private int _rop; // for tiling
+    private int _leftCapWidth;
+    private int _rightCapWidth;
+    
 
-    private int _backgroundColours[];
-    private int _backgroundSelectedColours[];
+    private boolean _focused;
+    private boolean _pressed;
 
-    private int _defaultSelectColour = 0x977DED;
-    private int _defaultBackgroundColour = 0xEEEEEE;
-    private int _defaultHoverColour = 0x999999;
+    private int _numValues;
+    private int _currentValue;
+
+    private int _preferredHeight;
+
+    // These values can be cached in layout() for use in paint()
+    private int _baseY;
+    private int _progressY;
+    private int _thumbY;
+    private int _trackWidth;
     
-    /**
-     * Bitmap thumb - The image that is used as the state indicator, it moves sideways
-     * Bitmap sliderBackground - the background image is stretched to fit, only stretched horizontally
-     * int numStates - the number of increments. NOTE: this DOES NOT include zero position (will be one larger than you say)
-     * int initialState - NOTE: this INCLUDES ZERO POSITION.
-     * int xLeftBackMargin - the amount of the background image to be used as the left side of image
-     * int xRightBackMargin - the amount of background image to be used as right side of image
-     *                       Everything between the left and right side gets tiled
-     *
-     * pre: NumStates must be greater or equal to initialState
-     * pre: NumStates must be greater than 1
-     */
-    public SliderField( Bitmap thumb
-                , Bitmap sliderBackground
-                , int numStates
-                , int initialState
-                , int xLeftBackMargin
-                , int xRightBackMargin )
+    // Used to tile the base and progress bitmaps
+    private int _rop; 
+
+    
+    public SliderField( Bitmap normalThumb,  Bitmap normalProgress,  Bitmap normalBase,
+                        Bitmap focusedThumb, Bitmap focusedProgress, Bitmap focusedBase,
+                        int numValues, int initialValue, int leftCapWidth, int rightCapWidth )
     {
-        this( thumb, sliderBackground, sliderBackground, numStates, initialState, xLeftBackMargin, xRightBackMargin, FOCUSABLE );
+        this( normalThumb,  normalProgress,  normalBase, 
+              focusedThumb, focusedProgress, focusedBase, 
+              null,         null,            null, 
+              numValues, initialValue, leftCapWidth, rightCapWidth, 0 );
     }
     
-    public SliderField( Bitmap thumb
-                , Bitmap sliderBackground
-                , int numStates
-                , int initialState
-                , int xLeftBackMargin
-                , int xRightBackMargin
-                , long style )
-    {  
-        this( thumb, sliderBackground, sliderBackground, numStates, initialState, xLeftBackMargin, xRightBackMargin, style );
-    }
-    
-    public SliderField( Bitmap thumb
-                , Bitmap sliderBackground
-                , Bitmap sliderBackgroundFocus
-                , int numStates
-                , int initialState
-                , int xLeftBackMargin
-                , int xRightBackMargin )
+    public SliderField( Bitmap normalThumb,  Bitmap normalProgress,  Bitmap normalBase,
+                        Bitmap focusedThumb, Bitmap focusedProgress, Bitmap focusedBase,
+                        int numValues, int initialValue, int leftCapWidth, int rightCapWidth, long style )
     {
-        this( thumb, sliderBackground, sliderBackgroundFocus, numStates, initialState, xLeftBackMargin, xRightBackMargin, FOCUSABLE );
+        this( normalThumb,  normalProgress,  normalBase, 
+              focusedThumb, focusedProgress, focusedBase, 
+              null,         null,            null, 
+              numValues, initialValue, leftCapWidth, rightCapWidth, style );
     }
     
-    public SliderField( Bitmap thumb
-                , Bitmap sliderBackground
-                , Bitmap sliderBackgroundFocus
-                , int numStates
-                , int initialState
-                , int xLeftBackMargin
-                , int xRightBackMargin
-                , long style )
+    public SliderField( Bitmap normalThumb,  Bitmap normalProgress,  Bitmap normalBase,
+                        Bitmap focusedThumb, Bitmap focusedProgress, Bitmap focusedBase,
+                        Bitmap pressedThumb, Bitmap pressedProgress, Bitmap pressedBase,
+                        int numValues, int initialValue, int leftCapWidth, int rightCapWidth )
+    {
+        this( normalThumb,  normalProgress,  normalBase, 
+              focusedThumb, focusedProgress, focusedBase, 
+              pressedThumb, pressedProgress, pressedBase, 
+              numValues, initialValue, leftCapWidth, rightCapWidth, 0 );
+    }
+    
+    public SliderField( Bitmap normalThumb,  Bitmap normalProgress,  Bitmap normalBase,
+                        Bitmap focusedThumb, Bitmap focusedProgress, Bitmap focusedBase,
+                        Bitmap pressedThumb, Bitmap pressedProgress, Bitmap pressedBase,
+                        int numValues, int initialValue, int leftCapWidth, int rightCapWidth, long style )
     {
         super( style );
 
-        if( initialState > numStates || numStates < 2 ){
+        if( numValues < 2 || initialValue >= numValues ) {
+            throw new IllegalArgumentException( "invalid value parameters" );
         }
-        _imageThumb = thumb;
-        _imageSlider = sliderBackground;
-        _imageSliderFocus = sliderBackgroundFocus;
-        _numStates = numStates;
-        setState( initialState );
-
-        _xLeftBackMargin = xLeftBackMargin;
-        _xRightBackMargin = xRightBackMargin;
-
-        _rop = _imageSlider.hasAlpha() ? Graphics.ROP_SRC_ALPHA : Graphics.ROP_SRC_COPY;
-
-        _thumbWidth = thumb.getWidth();
-        _thumbHeight = thumb.getHeight();
+        if( normalThumb == null  || normalProgress == null  || normalBase == null 
+         || focusedThumb == null || focusedProgress == null || focusedBase == null ) {
+            throw new IllegalArgumentException( "thumb, normal, focused  are required" );
+        }
         
-        initBitmaps();
+        _thumbWidth = normalThumb.getWidth();
+        _thumbHeight = normalThumb.getHeight();
+        _progressWidth = normalProgress.getWidth();
+        _progressHeight = normalProgress.getHeight();
+        _baseWidth = normalBase.getWidth();
+        _baseHeight = normalBase.getHeight();
+        
+        if( focusedThumb.getWidth() != _thumbWidth || focusedThumb.getHeight() != _thumbHeight
+         || focusedProgress.getHeight() != _progressHeight || focusedBase.getHeight() != _baseHeight ) {
+            throw new IllegalArgumentException( "all base bitmaps and all progress bitmaps must be the same height" );
+        }
+        if( pressedThumb != null && pressedProgress != null && pressedBase != null ) {
+            if( pressedThumb.getWidth() != _thumbWidth || pressedThumb.getHeight() != _thumbHeight
+             || pressedProgress.getHeight() != _progressHeight || pressedBase.getHeight() != _baseHeight ) {
+                throw new IllegalArgumentException( "all base bitmaps and all progress bitmaps must be the same height" );
+            }
+        }
+        
+        _leftCapWidth = leftCapWidth;
+        _rightCapWidth = rightCapWidth;
+
+        _rop = Graphics.ROP_SRC_COPY;
+        
+        initBitmaps( normalThumb,  normalProgress,  normalBase,  STATE_NORMAL  );
+        initBitmaps( focusedThumb, focusedProgress, focusedBase, STATE_FOCUSED );
+        
+        if( pressedThumb != null && pressedProgress != null && pressedBase != null ) {
+            initBitmaps( pressedThumb, pressedProgress, pressedBase, STATE_PRESSED );
+        } else {
+            // The pressed images are optional -- if they aren't provided, just use the focused images
+            _thumb[ STATE_PRESSED ]        = _thumb[ STATE_FOCUSED ];
+            _progress[ STATE_PRESSED ]     = _progress[ STATE_FOCUSED ];
+            _base[ STATE_PRESSED ]         = _base[ STATE_FOCUSED ];
+            _progressTile[ STATE_PRESSED ] = _progressTile[ STATE_FOCUSED ];
+            _baseTile[ STATE_PRESSED ]     = _baseTile[ STATE_FOCUSED ];
+        }
+        
+        _preferredHeight = Math.max( _thumbHeight, Math.max( _progressHeight, _baseHeight ) );
+
+        _numValues = numValues;
+        setValue( initialValue );
     }
                     
-
-    /**
-     * colours - An array of colours, one for each of the states
-     * selectColours - An array of colours, one for each selected state
-     */
-    public SliderField( Bitmap thumb
-                , Bitmap sliderBackground
-                , int numStates
-                , int initialState
-                , int xLeftBackMargin
-                , int xRightBackMargin
-                , int[] colours
-                , int[] selectColours )
-    {
-        this(thumb, sliderBackground, sliderBackground, numStates, initialState, xLeftBackMargin, xRightBackMargin, FOCUSABLE );
-
-        if( colours.length != numStates+1 ){
-            throw new IllegalArgumentException();
-        }
-        _backgroundColours = colours;
-        _backgroundSelectedColours = selectColours;
-    }
-
     /**
      * Cuts up the background image and margins you provide
      * to make the left, center, and right bitmaps
      */
-    public void initBitmaps()
+    public void initBitmaps( Bitmap thumb, Bitmap progress, Bitmap base, int state )
     {
-        int height = _imageSlider.getHeight();
-
-        _imageSliderLeft = new Bitmap( _xLeftBackMargin, height );
-        _imageSliderCenter = new Bitmap( _imageSlider.getWidth() - _xRightBackMargin - _xLeftBackMargin, height);
-        _imageSliderRight = new Bitmap( _xRightBackMargin, height );
-
-        copy( _imageSlider, 0, 0, _xLeftBackMargin, height, _imageSliderLeft );
-        copy( _imageSlider, _xLeftBackMargin, 0, _imageSlider.getWidth() - _xRightBackMargin - _xLeftBackMargin, height, _imageSliderCenter);
-        copy( _imageSlider, _imageSlider.getWidth() - _xRightBackMargin, 0, _xRightBackMargin, height, _imageSliderRight);
-        
-        _imageSliderFocusLeft = new Bitmap( _xLeftBackMargin, height );
-        _imageSliderFocusCenter = new Bitmap( _imageSlider.getWidth() - _xRightBackMargin - _xLeftBackMargin, height);
-        _imageSliderFocusRight = new Bitmap( _xRightBackMargin, height );
-        
-        copy( _imageSliderFocus, 0, 0, _xLeftBackMargin, height, _imageSliderFocusLeft );
-        copy( _imageSliderFocus, _xLeftBackMargin, 0, _imageSlider.getWidth() - _xRightBackMargin - _xLeftBackMargin, height, _imageSliderFocusCenter);
-        copy( _imageSliderFocus, _imageSlider.getWidth() - _xRightBackMargin, 0, _xRightBackMargin, height, _imageSliderFocusRight);
-    }
-
-    private void copy(Bitmap src, int x, int y, int width, int height, Bitmap dest) {
-        int[] argbData = new int[width * height];
-        src.getARGB(argbData, 0, width, x, y, width, height);
-        for(int tx = 0; tx < dest.getWidth(); tx += width) {
-            for(int ty = 0; ty < dest.getHeight(); ty += height) {
-                dest.setARGB(argbData, 0, width, tx, ty, width, height);
-            }
-        }
-    }
-
-    /**
-     * Change the state of the switch. Zero is far left
-     * @param on - if true, the switch will be set to on state
-     */
-    public void setState(int newState) {
-        if( newState > _numStates ){
+        if( progress.getWidth() <= _leftCapWidth
+         || base.getWidth() <= _rightCapWidth ) {
             throw new IllegalArgumentException();
-        } else {
-            _currentState = newState;
-            invalidate();
         }
+ 
+         if( thumb.hasAlpha() || progress.hasAlpha() || base.hasAlpha() ) {
+             // If any one of our images has an alpha channel we need to use ROP_SRC_ALPHA instead of ROP_SRC_COPY
+             _rop = Graphics.ROP_SRC_ALPHA;
+         }
+       
+        _thumb[ state ] = thumb;
+        _progress[ state ] = progress;
+        _base[ state ] = base;
+
+        int[] argbCopyBuffer;
+
+        // Create the progress tile (i.e. to the left of the thumb)
+        int progressTileWidth = progress.getWidth() - _leftCapWidth;
+        int progressTileHeight = progress.getHeight();
+
+        Bitmap progressTile = new Bitmap( progressTileWidth, progressTileHeight );
+
+        argbCopyBuffer = new int[ progressTileWidth * progressTileHeight ];
+        progress.getARGB( argbCopyBuffer, 0, progressTileWidth, _leftCapWidth, 0, progressTileWidth, progressTileHeight );
+        progressTile.setARGB( argbCopyBuffer, 0, progressTileWidth, 0, 0, progressTileWidth, progressTileHeight );
+
+        // Create the base tile (i.e. to the right of the thumb)
+        int baseTileWidth = base.getWidth() - _rightCapWidth;
+        int baseTileHeight = base.getHeight();
+
+        Bitmap baseTile = new Bitmap( baseTileWidth, baseTileHeight );
+
+        argbCopyBuffer = new int[ baseTileWidth * baseTileHeight ];
+        base.getARGB( argbCopyBuffer, 0, baseTileWidth, 0, 0, baseTileWidth, baseTileHeight );
+        baseTile.setARGB( argbCopyBuffer, 0, baseTileWidth, 0, 0, baseTileWidth, baseTileHeight );
+
+        _progressTile[ state ] = progressTile;
+        _baseTile[ state ] = baseTile;
     }
 
-    /**
-     * @return The current state that is selected
-     *          State zero is on the far left, and increase to the right
-     */
-    public int getState() {
-        return _currentState;
-    }
-
-    /**
-     * @return The number of states the slider has
-     */
-    public int getNumStates() {
-        return _numStates;
-    }
-    
-    /**
-     * @return The current background colour being used
-     */
-    public int getColour() {
-        if(_backgroundSelectedColours != null) {
-            return _backgroundSelectedColours[getState()];
-        }
-        return 0x000000;
-    }
-    
-    public int getPreferredWidth() {
-        return _totalWidth;
-    }
-
-    public int getPreferredHeight() {
-        return _totalHeight;
-    }
-
-    // Similar to TextFields layout()
-    protected void layout( int width, int height ) {
-        if (width < 0 || height < 0)
+    public void setValue( int newValue ) 
+    {
+        if( newValue < 0 || newValue >= _numValues ){
             throw new IllegalArgumentException();
-
-        // We'll take all we can get
-        _totalWidth = width;
-        
-        // The largest of the two image heights
-        _totalHeight = Math.max(_imageSlider.getHeight(), _imageThumb.getHeight());
-        
-        setExtent( _totalWidth, _totalHeight );
+        }
+        _currentValue = newValue;
+        fieldChangeNotify( FieldChangeListener.PROGRAMMATIC );
+        invalidate();
     }
 
-    public void paint( Graphics g )
+    public int getValue() 
     {
-        // Calculate the slider position
-        int sliderHeight = _imageSlider.getHeight();
-        int sliderBackYOffset = ( _totalHeight - sliderHeight ) >> 1;
-        
-        // Determine a Background Color for the slider
-        int backgroundColor = _defaultBackgroundColour;
-        if( _backgroundSelectedColours != null || _backgroundColours != null ) {
-            
-            if( _selected ) {
-                backgroundColor = _backgroundSelectedColours != null ? _backgroundSelectedColours[getState()] : _defaultSelectColour;
-            } else if(g.isDrawingStyleSet(Graphics.DRAWSTYLE_FOCUS)) {
-                backgroundColor = _backgroundColours != null ? _backgroundColours[getState()] : _defaultHoverColour;
-            } else {
-                backgroundColor = _defaultBackgroundColour;
-            }
-        }
-        g.setColor( backgroundColor );
-        g.fillRect( 1, sliderBackYOffset + 1, _totalWidth - 2, sliderHeight - 2 );
+        return _currentValue;
+    }
+
+    public int getNumValues() 
+    {
+        return _numValues;
+    }
     
-        if(g.isDrawingStyleSet(Graphics.DRAWSTYLE_FOCUS)) {    
-            paintSliderBackground( g, _imageSliderFocusLeft, _imageSliderFocusCenter, _imageSliderFocusRight );
-        } else {
-            paintSliderBackground( g, _imageSliderLeft, _imageSliderCenter, _imageSliderRight );
-        }
-        
-        // Calculate the thumb position
-        int thumbXOffset = ( ( _totalWidth - _thumbWidth ) * _currentState ) / _numStates;
-        
-        // Draw the thumb
-        g.drawBitmap( thumbXOffset, ( _totalHeight - _thumbHeight ) >> 1, _thumbWidth, _thumbHeight, _imageThumb, 0, 0 );
-    }
-
-    private void paintSliderBackground( Graphics g, Bitmap left, Bitmap middle, Bitmap right ) 
+    public int getPreferredWidth() 
     {
-        int sliderHeight = _imageSlider.getHeight();
-        int sliderBackYOffset = ( _totalHeight - sliderHeight ) >> 1;
+        return Integer.MAX_VALUE;
+    }
+
+    public int getPreferredHeight() 
+    {
+        return _preferredHeight;
+    }
+
+    protected void layout( int width, int height ) 
+    {
+        width = Math.min( width, getPreferredWidth() );
+        height = Math.min( height, getPreferredHeight() );
+
+        // Cache some values for paint() and input handling
+        _progressY = ( height - _progressHeight ) / 2;
+        _baseY = ( height - _baseHeight ) / 2;
+        _thumbY = ( height - _thumbHeight ) / 2;
         
-        // Left
-        g.drawBitmap( 0, sliderBackYOffset, _xLeftBackMargin, sliderHeight, left, 0, 0 );//lefttop
-        // Middle
-        g.tileRop( _rop, _xRightBackMargin, sliderBackYOffset, _totalWidth - _xLeftBackMargin - _xRightBackMargin, sliderHeight, middle, 0, 0 );//top
-        // Right
-        g.drawBitmap( _totalWidth - _xRightBackMargin, sliderBackYOffset, _xRightBackMargin, sliderHeight, right, 0, 0 );//lefttop
+        // The thumb should ride along the track from one end cap to the other but not cover up either one
+        _trackWidth = width - _leftCapWidth - _rightCapWidth;
+        
+        setExtent( width, height );
     }
+    
 
-    public void paintBackground( Graphics g ) 
+public void paint( Graphics g )
+{
+    int contentWidth = getContentWidth();
+
+    int thumbX = _leftCapWidth + ( _trackWidth - _thumbWidth ) * _currentValue / ( _numValues - 1 );
+    int transitionX = thumbX + _thumbWidth / 2;
+    
+    int currentState = _pressed ? STATE_PRESSED : ( _focused ? STATE_FOCUSED : STATE_NORMAL );
+    
+    Bitmap thumb        = _thumb[ currentState ];
+    Bitmap progress     = _progress[ currentState ];
+    Bitmap base         = _base[ currentState ];
+    Bitmap progressTile = _progressTile[ currentState ];
+    Bitmap baseTile     = _baseTile[ currentState ];
+
+    // Draw the left cap, and tile the progress region
+    g.drawBitmap( 0, _progressY, _leftCapWidth, _progressHeight, progress, 0, 0 );
+    g.tileRop( _rop, _leftCapWidth, _progressY, transitionX - _leftCapWidth, _progressHeight, progressTile, 0, 0 );
+    
+    // Draw the right cap, and tile the base region
+    g.drawBitmap( contentWidth - _rightCapWidth, _baseY, _rightCapWidth, _baseHeight, base, _baseWidth - _rightCapWidth, 0 );
+    g.tileRop( _rop, transitionX, _baseY, contentWidth - transitionX - _rightCapWidth, _baseHeight, baseTile, 0, 0 );
+    
+    // Draw the thumb
+    g.drawBitmap( thumbX, _thumbY, _thumbWidth, _thumbHeight, thumb, 0, 0 );
+}
+
+protected void drawFocus( Graphics g, boolean on )
     {
-        // nothing
+        // The paint() method looks after drawing the focus for us
     }
-
-    protected void drawFocus( Graphics g, boolean on )
+    
+    protected void onFocus( int direction )
     {
-        boolean oldDrawStyleFocus = g.isDrawingStyleSet( Graphics.DRAWSTYLE_FOCUS );
-        try {
-            if( on ) {
-                g.setDrawingStyle( Graphics.DRAWSTYLE_FOCUS, true );
-            }
-            paint( g );
-        } finally {
-            g.setDrawingStyle( Graphics.DRAWSTYLE_FOCUS, oldDrawStyleFocus );
-        }
+        _focused = true;
+        invalidate();
+        super.onFocus( direction );
+    }
+    
+    protected void onUnfocus()
+    {
+        _focused = false;
+        invalidate();
+        super.onUnfocus();
     }
 
-
-    /**
-     * Traps touch input events.
-     *
-     * <p> This method handles touch input events. DOWN events cause this ButtonField
-     * to enter a focused state, which is in fact handled at the Manager level. CLICK 
-     * events cause this ButtonField to enter an active (pressed) state. UNCLICK events 
-     * invoke {@link invokeAction} and {@link trackwheelUnclick} methods in sequence. The remaining 
-     * touch input events are consumed and/or ignored.
-     *
-     * @param message {@link TouchEvent} object containing various input parameters
-     * including the event type and touch coordinates.
-     * @return True if the event was consumed; otherwise, false.
-     * @throws IllegalArgumentException If <code>message</code> is null.
-     *
-     */
 //#ifndef VER_4.6.1 | VER_4.6.0 | VER_4.5.0 | VER_4.2.1 | VER_4.2.0
        
-    protected boolean touchEvent(TouchEvent message)
+    protected boolean touchEvent( TouchEvent message )
     {
-        boolean isConsumed = false;
-        boolean isOutOfBounds = false;
-        int x = message.getX(1);
-        int y = message.getY(1);
-        // Check to ensure point is within this field
-        if(x < 0 || y < 0 || x > getExtent().width || y > getExtent().height) {
-            isOutOfBounds = true;
-        }
-        switch(message.getEvent()) {
+        int event = message.getEvent();
+        switch( event ) {
+            
             case TouchEvent.CLICK:
+            case TouchEvent.DOWN:
+                // If we currently have the focus, we still get told about a click in a different part of the screen
+                if( touchEventOutOfBounds( message ) ) {
+                    return false;
+                }
+                // fall through
+                
             case TouchEvent.MOVE:
-                if(isOutOfBounds) return true; // consume
-                _selected = true; // Pressed effect
+                _pressed = true;
+                setValueByTouchPosition( message.getX( 1 ) );
+                fieldChangeNotify( 0 );
+                return true;
                 
-                // update state
-                int stateWidth = getExtent().width / _numStates;
-                int numerator = x / stateWidth;
-                int denominator = x % stateWidth;
-                if( denominator > stateWidth / 2 ) {
-                    numerator++;
-                }
-                _currentState = numerator;
-                invalidate();
-                
-                isConsumed = true;
-                break;
             case TouchEvent.UNCLICK:
-                if(isOutOfBounds) {
-                    _selected = false; // Reset presssed effect
-                    return true;
-                }
-                
-                // A field change notification is only sent on UNCLICK to allow for recovery
-                // should the user cancel, i.e. click and move off the button
-    
-                _selected = false; // Reset pressed effect
-                
-                // Update state
-                stateWidth = getExtent().width / _numStates;
-                numerator = x / stateWidth;
-                denominator = x % stateWidth;
-                if( denominator > stateWidth / 2 ) {
-                    numerator++;
-                }
-                _currentState = numerator;
+            case TouchEvent.UP:
+                _pressed = false;
                 invalidate();
+                return true;
                 
-                fieldChangeNotify(0);
-                
-                isConsumed = true;
-                break;
+            default:
+                return false;
         }
-        return isConsumed;
     }
+    
+    private boolean touchEventOutOfBounds( TouchEvent message )
+    {
+        int x = message.getX( 1 );
+        int y = message.getY( 1 );
+        return ( x < 0 || y < 0 || x > getWidth() || y > getHeight() );
+    }
+        
+    private void setValueByTouchPosition( int x )
+    {
+        _currentValue = MathUtilities.clamp( 0, ( x - _leftCapWidth ) * _numValues / _trackWidth, _numValues - 1 );
+        invalidate();
+    }
+        
+
 //#endif
 
-    protected boolean navigationMovement(int dx, int dy, int status, int time) 
+    protected boolean navigationMovement( int dx, int dy, int status, int time ) 
     {
-        if( _selected )
-        {
-            if(dx > 0 || dy > 0) {
-                incrementState();
-                fieldChangeNotify( 0 );
-                return true;
-            } else if(dx < 0 || dy < 0) {
-                decrementState();
-                fieldChangeNotify( 0 );
-                return true;
+        if( _pressed ) {
+            if( dx > 0 || dy > 0 ) {
+                incrementValue();
+            } else {
+                decrementValue();
             }
+            fieldChangeNotify( 0 );
+            return true;
         }
         return super.navigationMovement( dx, dy, status, time);
     }
 
-    public void decrementState() {
-        if(_currentState > 0) {
-            _currentState--;
+    private void incrementValue() 
+    {
+        if( _currentValue + 1 < _numValues ) {
+            _currentValue++;
             invalidate();
         }
     }
 
-    public void incrementState() {
-        if(_currentState < _numStates) {
-            _currentState++;
+    private void decrementValue() 
+    {
+        if( _currentValue > 0 ) {
+            _currentValue--;
             invalidate();
         }
     }
 
-
-    /**
-     * Invokes an action on this field.  The only action that is recognized by this method is
-     * {@link Field#ACTION_INVOKE}, which toggles this field from being checked and unchecked.
-    */
-    protected boolean invokeAction(int action) {
-        switch(action) {
-            case ACTION_INVOKE: {
-                toggleSelected();
-                return true;
-            }
+    protected boolean invokeAction( int action ) 
+    {
+        if( action == ACTION_INVOKE ) {
+            togglePressed();
+            return true;
         }
         return false;
     }
 
-    /**
-     * Listens for the space key to be pressed
-     * When pressed, state is toggles
-     */
-    protected boolean keyChar( char key, int status, int time ) {
+    protected boolean keyChar( char key, int status, int time ) 
+    {
         if( key == Characters.SPACE || key == Characters.ENTER ) {
-            toggleSelected();
+            togglePressed();
             return true;
         }
-
         return false;
     }
 
-    protected boolean trackwheelClick( int status, int time ) {
-        if( isEditable() ) {
-            toggleSelected();
-            return true;
-        }
-        return super.trackwheelClick(status, time);
+    protected boolean trackwheelClick( int status, int time ) 
+    {
+        togglePressed();
+        return true;
     }
 
-    /**
-     * Toggles the state of the switch
-     */
-    private void toggleSelected() {
-        _selected = !_selected;
+    private void togglePressed() 
+    {
+        _pressed = !_pressed;
         invalidate();
-    }
-
-    public void setDirty( boolean dirty )
-    {
-        // We never want to be dirty or muddy
-    }
-
-    public void setMuddy( boolean muddy )
-    {
-        // We never want to be dirty or muddy
     }
 
 }
