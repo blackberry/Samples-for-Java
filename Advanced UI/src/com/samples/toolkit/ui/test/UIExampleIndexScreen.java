@@ -35,11 +35,40 @@ public class UIExampleIndexScreen extends UIExampleScreen
         setTitle( "UI Example" );
         
         _foreground = new ForegroundManager();
-        
-        addHeading( "Buttons" );
-        ListStyleButtonSet buttonSet = new ListStyleButtonSet();
+
+        ListStyleButtonField link;
+        ListStyleButtonSet buttonSet;
        
-        ListStyleButtonField link = new ListStyleButtonField( "BitmapButtonField", _caret );
+       
+        addHeading( "Graphics" );
+        buttonSet = new ListStyleButtonSet();
+        
+        link = new ListStyleButtonField( "BitmapMask", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UIExampleAlphaMaskingScreen() );
+            }
+        } );
+        buttonSet.add( link );
+        
+        
+        link = new ListStyleButtonField( "AutoScaleImage", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UIExampleAutoScaleImageScreen() );
+            }
+        } );
+        buttonSet.add( link );
+        
+        
+        _foreground.add( buttonSet );
+        
+        
+       
+        addHeading( "Buttons" );
+        buttonSet = new ListStyleButtonSet();
+        
+        link = new ListStyleButtonField( "BitmapButtonField", _caret );
         link.setChangeListener( new FieldChangeListener( ) {
             public void fieldChanged( Field field, int context ) {
                 pushScreen( new UIExampleBitmapButtonScreen() );
@@ -125,6 +154,15 @@ public class UIExampleIndexScreen extends UIExampleScreen
         addHeading( "Managers" );
         ListStyleButtonSet managerSet = new ListStyleButtonSet();
         
+        
+        link = new ListStyleButtonField( "FieldSet", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UIExampleFieldSetIndexScreen() );
+            }
+        } );
+        managerSet.add( link );
+        
         link = new ListStyleButtonField( "ButtonFieldSet", _caret );
         link.setChangeListener( new FieldChangeListener( ) {
             public void fieldChanged( Field field, int context ) {
@@ -159,6 +197,80 @@ public class UIExampleIndexScreen extends UIExampleScreen
         
         
         _foreground.add( managerSet );
+        
+        
+        
+        
+        
+        addHeading( "Borders" );
+        ListStyleButtonSet bordersSet = new ListStyleButtonSet();
+        
+        link = new ListStyleButtonField( "Simple", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UIExampleSimpleBorderScreen() );
+            }
+        } );
+        bordersSet.add( link );
+        
+        link = new ListStyleButtonField( "Rounded", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UIExampleRoundedBorderScreen() );
+            }
+        } );
+        bordersSet.add( link );
+
+        link = new ListStyleButtonField( "Bevel", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UIExampleBevelBorderScreen() );
+            }
+        } );
+        bordersSet.add( link );
+
+        link = new ListStyleButtonField( "Bitmap", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UIExampleBitmapBorderScreen() );
+            }
+        } );
+        bordersSet.add( link );
+
+        _foreground.add( bordersSet );
+
+        
+        
+        
+        addHeading( "Backgrounds" );
+        ListStyleButtonSet backgroundsSet = new ListStyleButtonSet();
+        
+        link = new ListStyleButtonField( "Solid", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UiExampleSolidBackgroundScreen() );
+            }
+        } );
+        backgroundsSet.add( link );
+
+        link = new ListStyleButtonField( "LinearGradient", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UIExampleGradientBackgroundScreen() );
+            }
+        } );
+        backgroundsSet.add( link );
+
+        link = new ListStyleButtonField( "Bitmap", _caret );
+        link.setChangeListener( new FieldChangeListener( ) {
+            public void fieldChanged( Field field, int context ) {
+                pushScreen( new UIExampleBitmapBackgroundScreen() );
+            }
+        } );
+        backgroundsSet.add( link );
+
+        _foreground.add( backgroundsSet );
+        
         
         
         

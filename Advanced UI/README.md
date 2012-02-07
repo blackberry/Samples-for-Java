@@ -15,6 +15,7 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 **Author(s)** 
 
 * [Tim Windsor](https://github.com/timwindsor)
+* [Terrill Dent](https://github.com/terrilldent)
 
 
 **Dependencies**

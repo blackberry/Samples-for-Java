@@ -31,12 +31,11 @@ class MediaControlStyleField extends HorizontalFieldManager
     {
         super(Manager.FIELD_HCENTER);
         
-        add( new BitmapButtonField(Bitmap.getBitmapResource("prev.png"), Bitmap.getBitmapResource("prev_focus.png") ));
-        add( new BitmapButtonField(Bitmap.getBitmapResource("play.png"), Bitmap.getBitmapResource("play_focus.png") ));
-        add( new BitmapButtonField(Bitmap.getBitmapResource("stop.png"), Bitmap.getBitmapResource("stop_focus.png") ));
-        add( new BitmapButtonField(Bitmap.getBitmapResource("next.png"), Bitmap.getBitmapResource("next_focus.png") ));
+        add( new BitmapButtonField(Bitmap.getBitmapResource("button_back_normal.png"), Bitmap.getBitmapResource("button_back_focus.png") ));
+        add( new BitmapButtonField(Bitmap.getBitmapResource("button_play_normal.png"), Bitmap.getBitmapResource("button_play_focus.png") ));
+        add( new BitmapButtonField(Bitmap.getBitmapResource("button_forward_normal.png"), Bitmap.getBitmapResource("button_forward_focus.png") ));
         
-        setPadding(5,5,5,5);
+        setPadding( 5, 5, 5, 5 );
         setMargin( 10, 10, 10, 10 );
     }
     
