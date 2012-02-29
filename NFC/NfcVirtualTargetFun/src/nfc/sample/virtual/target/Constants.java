@@ -17,8 +17,8 @@ package nfc.sample.virtual.target;
 
 public interface Constants {
 
-    public static final String MYAPP_VERSION = "1.0.6";
-    public static final String MY_ISO_TARGET_ID = "12131415";
+    public static final String MYAPP_VERSION = "1.0.7";
+    public static final String MY_ISO_TARGET_ID = "1213141"; // length 4, 7 or 10 by NFC specification
     public static final int DISPLAY_COLUMN_WIDTH = 8;
 
     public static final int SC_BTN_STATE=0;
