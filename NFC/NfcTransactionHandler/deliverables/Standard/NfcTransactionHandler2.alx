@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="NfcTransactionHandler2">
+		<name >
+			
+		</name>
+		<description >
+			
+		</description>
+		<version >
+			1.0.0
+		</version>
+		<vendor >
+			BlackBerry Developer
+		</vendor>
+		<copyright >
+			Copyright (c) 2011 BlackBerry Developer
+		</copyright>
+		<fileset Java="1.54" _blackberryVersion="[7.0.0)">
+			<directory >
+				7.0.0
+			</directory>
+			<files >
+				NfcTransactionHandler2.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>
