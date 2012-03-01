@@ -1,0 +1,12 @@
+MIDlet-Name: NfcTransactionHandler
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: Martin Woolley
+MIDlet-Jar-URL: NfcTransactionHandler.jar
+MIDlet-Jar-Size: 0
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: ,img/icon2.png,
+RIM-MIDlet-Flags-1: 0
+MIDlet-2: nfc_handler,,auto
+RIM-MIDlet-Flags-2: 3
+
