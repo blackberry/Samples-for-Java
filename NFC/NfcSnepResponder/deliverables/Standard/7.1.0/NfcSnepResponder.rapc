@@ -1,0 +1,11 @@
+MIDlet-Name: NfcSnepResponder
+MIDlet-Version: 1.0.1
+MIDlet-Vendor: John Murray
+MIDlet-Description: vCard Responder using the SNEP protocol
+MIDlet-Jar-URL: NfcSnepResponder.jar
+MIDlet-Jar-Size: 0
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: NFC vCard Responder,img/SmartTag_Logo.png,
+RIM-MIDlet-Flags-1: 0
+
