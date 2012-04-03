@@ -1,0 +1,16 @@
+MIDlet-Name: NfcMidlet2
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: BlackBerry Developer
+MIDlet-Jar-URL: NfcMidlet2.jar
+MIDlet-Jar-Size: 9499
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: NfcMidlet2,img/icon.png,nfc.sample.midlet.NfcMidlet2
+RIM-MIDlet-Flags-1: 1
+Manifest-Version: 1.0
+RIM-COD-URL: NfcMidlet2.cod
+RIM-COD-Size: 14668
+RIM-COD-Creation-Time: 1333461343
+RIM-COD-Module-Name: NfcMidlet2
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_nfc
+RIM-COD-SHA1: ab 2e 93 b1 99 16 04 a3 3e d5 07 47 f0 06 ef ae b5 89 68 68
