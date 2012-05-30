@@ -1,0 +1,38 @@
+# Simple Location API
+
+SocialApp is a sample that demonstrates how BlackBerry Java Apps can integrate with native social apps such as Facebook, Twitter etc.
+
+The sample code for this application is Open Source under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
+
+**Applies To**
+
+* [BlackBerry Java SDK for Smartphones](http://us.blackberry.com/developers/javaappdev/)
+
+
+**Author(s)** 
+
+* [Shadid Haque](https://github.com/shaque)
+
+
+**Dependencies**
+
+1. BlackBerry Java SDK 7.0.0 or higher required.
+
+
+
+**To contribute code to this repository you must be [signed up as an official contributor](http://blackberry.github.com/howToContribute.html).**
+
+
+## Contributing Changes
+
+Please see the [README](https://github.com/blackberry/Samples-for-Java) of the Samples-for-Java repository for instructions on how to add new Samples or make modifications to existing Samples.
+
+
+## Bug Reporting and Feature Requests
+
+If you find a bug in a Sample, or have an enhancement request, simply file an [Issue](https://github.com/blackberry/Samples-for-Java/issues) for the Sample and send a message (via github messages) to the Sample Author(s) to let them know that you have filed an [Issue](https://github.com/blackberry/Samples-for-Java/issues).
+
+
+## Disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
