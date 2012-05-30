@@ -17,7 +17,7 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 **Dependencies**
 
 1. BlackBerry Java SDK 7.0.0 or higher required.
-
+2. Application Icon (License: Free for commercial use) courtesy of (http://www.graphicrating.com/)
 
 
 **To contribute code to this repository you must be [signed up as an official contributor](http://blackberry.github.com/howToContribute.html).**
