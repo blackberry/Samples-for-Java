@@ -1,10 +1,6 @@
 # Simple Location API
 
-Simple Location API, as the name suggests, is a simplified version of the Location API packages available on the BlackBerry&reg; development platform. This API is built on top of the existing Location APIs and offers a simple, worry-free but feature-rich API that will hopefully allow the developers to focus on their application instead of spending a lot of time on the complex details and corner cases of standard Location APIs. A demo application is included with the source.
-
-The project can be imported with the BlackBerry Java Plugin for Eclipse. Once it has been imported, build it and run to test it on a simulator or device.
-
-Further details are here: http://supportforums.blackberry.com/t5/Java-Development/Simple-Location-API/ta-p/1145951
+SocialApp is a sample that demonstrates how BlackBerry Java Apps can integrate with native social apps such as Facebook, Twitter etc.
 
 The sample code for this application is Open Source under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
 
@@ -20,8 +16,8 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 
 **Dependencies**
 
-1. BlackBerry Java SDK 5.0.0 or higher required.
-
+1. BlackBerry Java SDK 7.0.0 or higher required.
+2. Application Icon (License: Free for commercial use) courtesy of (http://www.graphicrating.com/)
 
 
 **To contribute code to this repository you must be [signed up as an official contributor](http://blackberry.github.com/howToContribute.html).**
