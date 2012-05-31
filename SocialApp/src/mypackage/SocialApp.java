@@ -1,4 +1,3 @@
-package mypackage;
 /*
 * Copyright (c) 2012 Research In Motion Limited.
 *
@@ -14,6 +13,8 @@ package mypackage;
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+
+package mypackage;
 
 import net.rim.device.api.ui.UiApplication;
 

@@ -1,4 +1,4 @@
-# Simple Location API
+# The Social App
 
 SocialApp is a sample that demonstrates how BlackBerry Java Apps can integrate with native social apps such as Facebook, Twitter etc.
 
