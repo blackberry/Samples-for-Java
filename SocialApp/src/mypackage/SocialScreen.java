@@ -13,7 +13,6 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-
 package mypackage;
 
 import net.rim.blackberry.api.sendmenu.SendCommand;
@@ -63,7 +62,7 @@ public final class SocialScreen extends MainScreen {
 		setBorder(BorderFactory.createBitmapBorder(new XYEdges(9, 9, 9, 9), Bitmap.getBitmapResource("border.png")));
 		setTitle(new LabelField("(: The Social App :)", DrawStyle.HCENTER|Field.FIELD_HCENTER));	
 
-		filePickButton = new ButtonField("Photo Share") {
+		filePickButton = new ButtonField("Photo Share", Field.FIELD_HCENTER) {
 			protected boolean navigationClick(int status, int time) {
 				FilePicker picker = FilePicker.getInstance();
 				picker.setFilter(".jpg:.png");
@@ -113,7 +112,7 @@ public final class SocialScreen extends MainScreen {
 			}
 
 			public int getPreferredWidth() {
-				return Display.getWidth();
+				return Display.getWidth()/2;
 			}
 		};
 
@@ -130,7 +129,7 @@ public final class SocialScreen extends MainScreen {
 		textField.setTextStrokeColor(Color.WHITE);
 
 		// A button that initiates the Text Share
-		shareTextButton = new ButtonField("Text Share") {
+		shareTextButton = new ButtonField("Text Share", Field.FIELD_HCENTER) {
 			protected boolean navigationClick(int arg0, int arg1) {
 				// Creating the data context as a JSONObject
 				JSONObject context = new JSONObject();
@@ -162,8 +161,8 @@ public final class SocialScreen extends MainScreen {
 			}
 
 			public int getPreferredWidth() {
-				return Display.getWidth();
-			}
+				return Display.getWidth()/2;
+			}			
 		};
 
 		add(textField);
@@ -189,6 +188,7 @@ public final class SocialScreen extends MainScreen {
 					} catch (SendCommandException e) {
 						SendDialog.inform(Dialog.D_OK, e.toString(), Dialog.OK, null);
 					}
+					UiApplication.getUiApplication().popScreen(getScreen());
 					return true;
 				}
 	
@@ -206,6 +206,7 @@ public final class SocialScreen extends MainScreen {
 					} catch (SendCommandException e) {
 						SendDialog.inform(Dialog.D_OK, e.toString(), Dialog.OK, null);
 					}
+					UiApplication.getUiApplication().popScreen(getScreen());
 					return true;
 				}
 	
