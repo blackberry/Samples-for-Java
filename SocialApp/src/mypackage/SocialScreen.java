@@ -21,7 +21,6 @@ import net.rim.blackberry.api.sendmenu.SendCommandException;
 import net.rim.blackberry.api.sendmenu.SendCommandRepository;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.system.Display;
-import net.rim.device.api.ui.Color;
 import net.rim.device.api.ui.DrawStyle;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.UiApplication;
@@ -124,10 +123,8 @@ public final class SocialScreen extends MainScreen {
 
 		// An EditField to let the user type in the text to share.
 		textField = new EditField("", "Share this please.");
-		textField.setBorder(BorderFactory.createBitmapBorder(new XYEdges(9, 9, 9, 9), Bitmap.getBitmapResource("border.png")));
-		textField.setTextFillColor(Color.WHITE);
-		textField.setTextStrokeColor(Color.WHITE);
-
+		textField.setBorder(BorderFactory.createRoundedBorder(new XYEdges(3, 3, 3, 3)));
+		
 		// A button that initiates the Text Share
 		shareTextButton = new ButtonField("Text Share", Field.FIELD_HCENTER) {
 			protected boolean navigationClick(int arg0, int arg1) {
