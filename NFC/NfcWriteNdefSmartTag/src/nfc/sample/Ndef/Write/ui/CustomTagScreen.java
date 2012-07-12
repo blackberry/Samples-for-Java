@@ -61,9 +61,6 @@ public class CustomTagScreen extends MainScreen implements TagCreatorScreen {
 
     private RichTextField heading = new RichTextField();
 
-    private MenuItem mi_reg = new MenuItem(new StringProvider("Start listening"), 110, 10);
-    private MenuItem mi_unreg = new MenuItem(new StringProvider("Stop listening"), 110, 10);
-
     private Hashtable _tag_attrs = new Hashtable();
 
     /*
@@ -98,14 +95,6 @@ public class CustomTagScreen extends MainScreen implements TagCreatorScreen {
         add(separator2);
 
         add(_log);
-
-        mi_reg.setCommandContext(_smartTagListener);
-        mi_reg.setCommand(new Command(new RegisterCommand(this)));
-        addMenuItem(mi_reg);
-
-        mi_unreg.setCommandContext(_smartTagListener);
-        mi_unreg.setCommand(new Command(new UnregisterCommand(this)));
-        addMenuItem(mi_unreg);
 
         _listener_mgr.set_log_screen(this);
         _listener_mgr.registerListener(_smartTagListener);
