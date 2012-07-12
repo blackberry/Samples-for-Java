@@ -1,0 +1,16 @@
+MIDlet-Name: LLCPDemo
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: BlackBerry Developer
+MIDlet-Jar-URL: LLCPDemo.jar
+MIDlet-Jar-Size: 116307
+MicroEdition-Profile: MIDP-2.0
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: LLCPDemo,img/my_icon.png,
+RIM-MIDlet-Flags-1: 0
+Manifest-Version: 1.0
+RIM-COD-URL: LLCPDemo.cod
+RIM-COD-Size: 48348
+RIM-COD-Creation-Time: 1342085635
+RIM-COD-Module-Name: LLCPDemo
+RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_nfc
+RIM-COD-SHA1: 9f b5 69 92 d6 8e ef c5 87 1a 0c 91 45 53 3d 3e 20 92 85 5c

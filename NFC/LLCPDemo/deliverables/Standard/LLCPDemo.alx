@@ -1,0 +1,31 @@
+<loader version="1.0">
+	<application id="LLCPDemo">
+		<name >
+			LLCPDemo
+		</name>
+		<description >
+			
+		</description>
+		<version >
+			1.0.0
+		</version>
+		<vendor >
+			BlackBerry Developer
+		</vendor>
+		<copyright >
+			Copyright (c) 2012 BlackBerry Developer
+		</copyright>
+		<fileset Java="1.54" _blackberryVersion="[7.1.0)">
+			<directory >
+				7.1.0
+			</directory>
+			<files >
+				LLCPDemo.cod
+
+			</files>
+
+		</fileset>
+
+	</application>
+
+</loader>
