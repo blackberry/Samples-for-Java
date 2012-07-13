@@ -17,7 +17,7 @@ package nfc.sample.Ndef.Write;
 
 public interface Constants {
 
-    public static final String MYAPP_VERSION = "1.1.1";
+    public static final String MYAPP_VERSION = "1.1.2";
 
     public static final int BTN_STATE=0;
     
