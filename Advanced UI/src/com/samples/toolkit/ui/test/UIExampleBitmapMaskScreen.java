@@ -5,7 +5,7 @@
  * Copyright Research In Motion Limited, 2012-2012
  */
 
-package src.com.samples.toolkit.ui.test;
+package com.samples.toolkit.ui.test;
 
 
 
