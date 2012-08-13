@@ -234,13 +234,13 @@ public class ListStyleButtonField extends Field
     
     protected boolean navigationClick( int status, int time ) 
     {
-        clickButton(); 
+        if (status != 0) clickButton(); 
         return true;    
     }
     
     protected boolean trackwheelClick( int status, int time )
     {        
-        clickButton();    
+        if (status != 0) clickButton();    
         return true;
     }
     
