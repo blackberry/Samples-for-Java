@@ -277,10 +277,21 @@ public class GameScreen extends MainScreen implements GameMessageProcessor, Tile
         turn_over.set_tile_changed(tile);
         turn_over.set_symbol_played(_symbol);
         if(!game_state.isGame_over() && !game_state.isBoardFull()) {
-            setStatusMessage("Touch devices to pass turn to other player");
+            Utilities.log("XXXX tileChanged tile_count_this_turn=" + game_state.getTile_count_this_turn());
             if(game_state.getTile_count_this_turn() == 1) {
                 // get ready to send the turn over message when players touch devices again
+                setStatusMessage("Touch devices to pass turn to other player");
                 prepTurnOver();
+            } else {
+                if(game_state.getTile_count_this_turn() == 0) {
+                    // tile was unset so switch off messaging
+                    try {
+                        proto.disableMessaging();
+                    } catch(NFCException e) {
+                        Utilities.log("XXXX " + e.getClass().getName() + ":" + e.getMessage());
+                        setStatusMessage("Error: please try again");
+                    }
+                }
             }
         }
     }

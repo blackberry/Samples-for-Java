@@ -103,6 +103,7 @@ public class GameState {
             tile_states[tile] = players_symbol;
             setUiState(tile, players_symbol, true);
             tile_count_this_turn++;
+            Utilities.log("XXXX updateTileThisPlayer tile_count_this_turn=" + tile_count_this_turn);
             _listener.tileChanged(tile);
             tile_set = true;
             if (hasWon(players_symbol)) {
@@ -126,6 +127,9 @@ public class GameState {
                 tile_states[tile] = Constants.TILE_STATE_BLANK;
                 setUiState(tile, Constants.TILE_STATE_BLANK, true);
                 tile_set = false;
+                tile_count_this_turn--;
+                _listener.tileChanged(tile);
+                Utilities.log("XXXX updateTileThisPlayer tile_count_this_turn=" + tile_count_this_turn);
             } else {
                 Utilities.log("XXXX updateTileThisPlayer ignoring request as tile contains other player's symbol or is locked from previous turn");
                 tile_set = false;
