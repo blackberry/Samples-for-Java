@@ -72,13 +72,13 @@ public abstract class BaseButtonField extends Field
     
     protected boolean navigationClick( int status, int time ) 
     {
-        clickButton(); 
+        if (status != 0) clickButton(); 
         return true;    
     }
     
     protected boolean trackwheelClick( int status, int time )
     {        
-        clickButton();    
+        if (status != 0) clickButton();    
         return true;
     }
     
@@ -93,6 +93,23 @@ public abstract class BaseButtonField extends Field
         return super.invokeAction( action );
     }    
 
+    protected boolean touchEvent( TouchEvent message )
+    {
+        int x = message.getX( 1 );
+        int y = message.getY( 1 );
+        if( x < 0 || y < 0 || x > getExtent().width || y > getExtent().height ) {
+            // Outside the field
+            return false;
+        }
+        switch( message.getEvent() ) {
+       
+            case TouchEvent.UNCLICK:
+                clickButton();
+                return true;
+        }
+        return super.touchEvent( message );
+    }
+    
     public void setDirty( boolean dirty ) {
         // We never want to be dirty or muddy
     }
