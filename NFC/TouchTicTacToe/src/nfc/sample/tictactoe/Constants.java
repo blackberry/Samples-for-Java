@@ -18,7 +18,7 @@ import net.rim.device.api.ui.Color;
 
 public interface Constants {
 
-    public static final String MYAPP_VERSION = "1.0.2";
+    public static final String MYAPP_VERSION = "1.0.3";
     public static final String MYAPP_NAME = "Touch Tic Tac Toe";
     
     public static final String [] WINNER_MESSAGE = {"YOU HAVE WON!!","Touch devices to start new game"};
