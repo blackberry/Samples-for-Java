@@ -15,18 +15,22 @@
 */
 
 package nfc.sample.tictactoe.ui;
+import net.rim.device.api.command.Command;
 import net.rim.device.api.io.nfc.NFCException;
 import net.rim.device.api.io.nfc.ndef.NDEFMessage;
 import net.rim.device.api.io.nfc.push.NDEFPushStatusCallback;
 import net.rim.device.api.system.Bitmap;
 import net.rim.device.api.ui.Field;
+import net.rim.device.api.ui.MenuItem;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.container.AbsoluteFieldManager;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.decor.Background;
 import net.rim.device.api.ui.decor.BackgroundFactory;
+import net.rim.device.api.util.StringProvider;
 import nfc.sample.tictactoe.Constants;
 import nfc.sample.tictactoe.Utilities;
+import nfc.sample.tictactoe.commands.AboutCommand;
 import nfc.sample.tictactoe.protocol.GameMessageProcessor;
 import nfc.sample.tictactoe.protocol.GameProtocol;
 import nfc.sample.tictactoe.protocol.ProtocolMessage;
@@ -37,11 +41,17 @@ public class StartGameScreen extends MainScreen implements GameMessageProcessor 
     private GameProtocol proto;
     private Bitmap new_game_screen;
     private TimedLabelField status_message;
+    private MenuItem mi_about = new MenuItem(new StringProvider("About"), 110, 10);
 
     private ProtocolMessageMasterBid my_bid;
 
     public StartGameScreen() {
         super(Field.USE_ALL_HEIGHT | Field.USE_ALL_WIDTH | Field.FIELD_HCENTER | Field.FIELD_VCENTER);
+        
+        mi_about.setCommandContext(this);
+        mi_about.setCommand(new Command(new AboutCommand()));
+        addMenuItem(mi_about);
+
         AbsoluteFieldManager abmgr = new AbsoluteFieldManager();
         new_game_screen = BitmapFactory.getNewGameScreen();
         Background bg_new_game = BackgroundFactory.createBitmapBackground(new_game_screen);
