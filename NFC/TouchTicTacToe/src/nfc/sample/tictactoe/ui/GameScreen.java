@@ -15,6 +15,7 @@
 */
 
 package nfc.sample.tictactoe.ui;
+import net.rim.device.api.command.Command;
 import net.rim.device.api.io.nfc.NFCException;
 import net.rim.device.api.io.nfc.ndef.NDEFMessage;
 import net.rim.device.api.io.nfc.push.NDEFPushStatusCallback;
@@ -23,13 +24,16 @@ import net.rim.device.api.system.Display;
 import net.rim.device.api.ui.Field;
 import net.rim.device.api.ui.FocusChangeListener;
 import net.rim.device.api.ui.Graphics;
+import net.rim.device.api.ui.MenuItem;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.ui.container.AbsoluteFieldManager;
 import net.rim.device.api.ui.container.MainScreen;
 import net.rim.device.api.ui.decor.Background;
 import net.rim.device.api.ui.decor.BackgroundFactory;
+import net.rim.device.api.util.StringProvider;
 import nfc.sample.tictactoe.Constants;
 import nfc.sample.tictactoe.Utilities;
+import nfc.sample.tictactoe.commands.AboutCommand;
 import nfc.sample.tictactoe.commands.SelectTileCommand;
 import nfc.sample.tictactoe.game.GameState;
 import nfc.sample.tictactoe.game.GameStateChangeListener;
@@ -71,6 +75,8 @@ public class GameScreen extends MainScreen implements GameMessageProcessor, Tile
     private Bitmap stale_mate_nought_bmp;
     private Bitmap cross_unfocused;
     private Bitmap nought_unfocused;
+    
+    private MenuItem mi_about = new MenuItem(new StringProvider("About"), 110, 10);
 
     public synchronized static GameScreen getInstance(int player_no) {
         Utilities.log("XXXX GameScreen.getInstance(" + player_no + "): height=" + Display.getHeight() + ",width=" + Display.getWidth());
@@ -98,6 +104,11 @@ public class GameScreen extends MainScreen implements GameMessageProcessor, Tile
         int width = Display.getWidth();
         int height = Display.getHeight();
         uiconfig = UiConfigFactory.getUiConfig(width, height);
+        
+        mi_about.setCommandContext(this);
+        mi_about.setCommand(new Command(new AboutCommand()));
+        addMenuItem(mi_about);
+
 
         Bitmap blank_unfocused = BitmapFactory.getBlankUnfocused();
         Bitmap blank_focused = BitmapFactory.addStateIndicator(blank_unfocused, Constants.FOCUSED_COLOUR);

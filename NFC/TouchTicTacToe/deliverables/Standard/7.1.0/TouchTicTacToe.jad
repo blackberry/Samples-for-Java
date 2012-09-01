@@ -2,18 +2,18 @@ MIDlet-Name: TouchTicTacToe
 MIDlet-Version: 1.0.0
 MIDlet-Vendor: BlackBerry Developer
 MIDlet-Jar-URL: TouchTicTacToe.jar
-MIDlet-Jar-Size: 247594
+MIDlet-Jar-Size: 249747
 MicroEdition-Profile: MIDP-2.0
 MicroEdition-Configuration: CLDC-1.1
 MIDlet-1: ,img/icon4.png,
 RIM-MIDlet-Flags-1: 0
 Manifest-Version: 1.0
 RIM-COD-URL: TouchTicTacToe.cod
-RIM-COD-Size: 61640
-RIM-COD-Creation-Time: 1345031668
+RIM-COD-Size: 61656
+RIM-COD-Creation-Time: 1346403036
 RIM-COD-Module-Name: TouchTicTacToe
 RIM-COD-Module-Dependencies: net_rim_cldc,net_rim_nfc
-RIM-COD-SHA1: 45 d2 72 b1 bb 88 15 da 61 ec 96 29 3f b0 41 ea a5 a7 ab f9
+RIM-COD-SHA1: ad 04 2d 5a 84 0f b9 5a d0 1e b9 e7 b2 54 e7 dd 2b 39 68 6e
 RIM-COD-URL-1: TouchTicTacToe-1.cod
-RIM-COD-Size-1: 23668
-RIM-COD-SHA1-1: ea 05 58 83 38 07 b6 4f 85 f5 ee 48 ac 5d e6 0f 04 5f ee e9
+RIM-COD-Size-1: 24700
+RIM-COD-SHA1-1: 2a 2e f4 76 d3 c7 66 42 d5 f1 65 36 68 08 f0 2b a1 2b 97 72
