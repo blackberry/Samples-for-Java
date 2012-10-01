@@ -1,0 +1,28 @@
+package nfc.sample.racetimebb7;
+
+import net.rim.device.api.ui.UiApplication;
+
+public class MyApp extends UiApplication {
+
+    public static void main(String[] args) {
+        MyApp app = new MyApp();
+        NdefListenerManager ndef_mgr = NdefListenerManager.getInstance();
+        Utilities.initLogging();
+        if  (args.length > 0) {
+            if (args[0].equals("auto")) {
+                Listener listener = new Listener();
+                ndef_mgr.registerListener(listener);
+            }
+        } else {
+            Listener listener = new Listener();
+            ndef_mgr.registerListener(listener);
+            app.pushScreen(TimerScreen.getTimerScreen());
+            app.enterEventDispatcher();
+        }
+        Utilities.log("XXXX exiting");
+    }
+
+    public MyApp() {
+    }
+
+}

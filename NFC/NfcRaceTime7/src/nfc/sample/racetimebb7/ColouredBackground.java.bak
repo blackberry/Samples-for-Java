@@ -1,0 +1,17 @@
+package nfc.sample.racetimebb7;
+
+import net.rim.device.api.ui.container.HorizontalFieldManager;
+import net.rim.device.api.ui.decor.Background;
+import net.rim.device.api.ui.decor.BackgroundFactory;
+
+public class ColouredBackground extends HorizontalFieldManager {
+
+	Background background;
+
+	public ColouredBackground(int colour, long style) {
+		super(style);
+		background = BackgroundFactory.createSolidBackground(colour);
+		setBackground(background);
+	}
+	
+}
