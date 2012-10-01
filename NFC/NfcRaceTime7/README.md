@@ -8,6 +8,23 @@ The sample code for this application is Open Source under the Apache 2.0 License
 
 Note that there is also a BlackBerry 10 Cascades version of this application. https://github.com/blackberry/Cascades-Community-Samples/tree/master/NfcRaceTimeWay
 
+To create tags for use with this application, use the NfcWriteNdefSmartTag application:
+
+	https://github.com/blackberry/Samples-for-Java/tree/master/NFC/NfcWriteNdefSmartTag
+	
+Write two "custom" tags, with the following values:
+
+Start Tag: 
+  Domain: my.rim.com
+  Type: myrecordtype
+  Content: start
+  
+Stop Tag: 
+  Domain: my.rim.com
+  Type: myrecordtype
+  Content: stop
+  
+
 The sample code for this application is Open Source under 
 the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html).
 
