@@ -11,9 +11,10 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 * [BlackBerry Java SDK for Smartphones](http://us.blackberry.com/developers/javaappdev/)
 
 
-**Author** 
+**Authors** 
 
 * [Martin Woolley](https://github.com/mdwoolley)
+* [John Murray](https://github.com/jcmurray)
 
 
 **Dependencies**
