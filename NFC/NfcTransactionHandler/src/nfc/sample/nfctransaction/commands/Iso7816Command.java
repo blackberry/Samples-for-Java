@@ -59,7 +59,7 @@ public class Iso7816Command extends AlwaysExecutableCommand {
             // Open an APDUConnection to our applet. This results in an ISO 7816-4 SELECT command being sent by the JSR-177 API
             String connection_string = Utilities.makeApduConnectionString(settings.getRegistered_aid());
             Utilities.log("XXXX " + Thread.currentThread().getName() + " ISO 7816-4 command: opening APDUConnection to " + connection_string);
-            apduConn = (APDUConnection) Connector.open(Constants.CONNECTION_STRING);
+            apduConn = (APDUConnection) Connector.open(connection_string);
             Utilities.log("XXXX " + Thread.currentThread().getName() + " ISO 7816-4 command: APDUConnection opened");
             screen.setUserMessage("Selected AID OK");
             // Send the APDU and wait for a response - expect an error here unless your applet supports the command that was sent

@@ -28,7 +28,6 @@ public class Constants {
 //    public static final String CONNECTION_STRING = "apdu:0;target=4E.46.43.54.65.73.74.65.72.20.31.2E.30";
     // SIM 2
     public static final byte[][] MY_AIDS = {  { 0x6E, 0x66, 0x63, 0x74, 0x65, 0x73, 0x74, 0x30, 0x31 } };
-    public static final String CONNECTION_STRING = "apdu:0;target=6E.66.63.74.65.73.74.30.31";
 
     public static long UI_IS_RUNNING = 0xcb4b95cab37dbc72L;
 
