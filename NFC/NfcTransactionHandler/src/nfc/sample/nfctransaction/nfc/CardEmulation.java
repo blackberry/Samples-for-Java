@@ -106,8 +106,8 @@ public class CardEmulation implements TextDetailsProvider {
 
         // register our app as a transaction listener
         try {
-            Utilities.log("XXXX " + pid + ":" + Thread.currentThread().getName() + " adding transaction listener for AID:"+settings.getRegistered_aid());
-            se.addTransactionListener(tl, settings.getRegistered_aid_arrays());
+            Utilities.log("XXXX " + pid + ":" + Thread.currentThread().getName() + " adding transaction listener for AID:"+settings.getRegisteredAIDAsString());
+            se.addTransactionListener(tl, settings.getRegisteredAIDAsString());
             _tl = tl;
         } catch(NFCException e) {
             if(!e.getMessage().startsWith("TransactionListener has already been added")) {
