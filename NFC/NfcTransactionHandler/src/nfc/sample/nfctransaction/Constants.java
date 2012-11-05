@@ -17,7 +17,7 @@ package nfc.sample.nfctransaction;
 import net.rim.device.api.ui.Color;
 
 public class Constants {
-    public static String VERSION = "1.1.5";
+    public static String VERSION = "1.2.1";
 
     public static final int SE_SIM=0;
     public static final int SE_EMB=1;

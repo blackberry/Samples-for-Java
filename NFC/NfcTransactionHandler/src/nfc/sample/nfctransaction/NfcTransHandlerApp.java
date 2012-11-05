@@ -27,6 +27,7 @@ import net.rim.device.api.system.ApplicationDescriptor;
 import net.rim.device.api.system.ApplicationManager;
 import net.rim.device.api.system.ApplicationManagerException;
 import net.rim.device.api.system.Backlight;
+import net.rim.device.api.system.GPRSInfo;
 import net.rim.device.api.system.RuntimeStore;
 import net.rim.device.api.ui.UiApplication;
 import net.rim.device.api.util.ByteArrayUtilities;
@@ -67,6 +68,9 @@ public class NfcTransHandlerApp extends UiApplication implements TransactionList
                 
                 Backlight.enable(true, 10);
 
+                // Essential that the SIM is unlocked (PIN) and initialised before we can proceed to use JSR177
+                waitForSimInitialisation();
+
                 CardEmulation.registerTransactionListener(app);
 
                 Utilities.log("XXXX " + pid + ":" + Thread.currentThread().getName() + " TransactionListener is exiting and will be restarted when a transaction occurs");
@@ -89,6 +93,23 @@ public class NfcTransHandlerApp extends UiApplication implements TransactionList
             Utilities.log("XXXX " + pid + ":" + Thread.currentThread().getName() + " entering event dispatcher");
             app.enterEventDispatcher();
         }
+    }
+
+    private static void waitForSimInitialisation() {
+        
+        int mcc = GPRSInfo.getHomeMCC();
+        int mnc = GPRSInfo.getHomeMNC();
+        Utilities.log("XXXX MCC="+mcc+",MNC="+mnc);
+        while (mcc == -1) {
+            try {
+                Thread.sleep(3000);
+            } catch(InterruptedException e) {
+            }
+            mcc = GPRSInfo.getHomeMCC();
+            mnc = GPRSInfo.getHomeMNC();
+            Utilities.log("XXXX MCC="+mcc+",MNC="+mnc);
+        }
+        Utilities.log("XXXX SIM initialised.... proceeding");
     }
 
     private static void dumpArgs(String[] args) {
