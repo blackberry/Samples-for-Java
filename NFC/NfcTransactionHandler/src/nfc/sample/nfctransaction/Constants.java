@@ -17,18 +17,14 @@ package nfc.sample.nfctransaction;
 import net.rim.device.api.ui.Color;
 
 public class Constants {
-    public static String VERSION = "1.2.0";
+    public static String VERSION = "1.2.1";
 
     public static final int SE_SIM=0;
     public static final int SE_EMB=1;
     public static String [] SE_NAMES = {"SIM","EMBEDDED"};
     
-    // SIM 1
-//    public static final byte[][] MY_AIDS = { { 0x4E, 0x46, 0x43, 0x54, 0x65, 0x73, 0x74, 0x65, 0x72, 0x20, 0x31, 0x2E, 0x30 }   };
-//    public static final String CONNECTION_STRING = "apdu:0;target=4E.46.43.54.65.73.74.65.72.20.31.2E.30";
-    // SIM 2
-    public static final byte[][] MY_AIDS = {  { 0x6E, 0x66, 0x63, 0x74, 0x65, 0x73, 0x74, 0x30, 0x31 } };
-    public static final String CONNECTION_STRING = "apdu:0;target=6E.66.63.74.65.73.74.30.31";
+    public static final byte[] DEFAULT_AID = { 0x6E, 0x66, 0x63, 0x74, 0x65, 0x73, 0x74, 0x30, 0x31 };
+    public static final byte[] DEFAULT_APDU = { (byte)0x80, 1, 0, 0};
 
     public static long UI_IS_RUNNING = 0xcb4b95cab37dbc72L;
 

@@ -35,8 +35,7 @@ public class Settings implements Persistable {
     private boolean _ISO14443B;
     private boolean _ISO14443B_PRIME;
     private String _registered_aid="";
-    
-    private byte [][] _registered_aid_arrays = {  { 0x6E, 0x66, 0x63, 0x74, 0x65, 0x73, 0x74, 0x30, 0x31 } };;
+    private String _apdu;
     
     private Settings() {
     }
@@ -70,9 +69,9 @@ public class Settings implements Persistable {
                 _settings.setISO14443B(true);
                 _settings.setISO14443B_PRIME(false);
                 _settings.setSecure_element(Constants.SE_SIM);
-                _settings.setRegistered_aid(ByteArrayUtilities.byteArrayToHex(Constants.MY_AIDS[0]));
+                _settings.setRegisteredAID(Constants.DEFAULT_AID);
+                _settings.setAPDU(Constants.DEFAULT_APDU);
             }
-            _settings.setRegistered_aid_arrays(_settings.getRegistered_aid());
         }
     }
     
@@ -134,21 +133,35 @@ public class Settings implements Persistable {
         _ISO14443B_PRIME = iSO14443B_PRIME;
     }
     
-    public String getRegistered_aid() {
+    public String getRegisteredAIDAsString() {
         return _registered_aid;
     }
 
-    public byte [][] getRegistered_aid_arrays() {
-        return _registered_aid_arrays;
+    public byte [] getRegisteredAID() {
+        return ByteArrayUtilities.hexToByteArray(_registered_aid);
     }
 
-    public void setRegistered_aid(String registered_aid) {
+    public void setRegisteredAID(String registered_aid) {
         _registered_aid = registered_aid;
-        setRegistered_aid_arrays(registered_aid);
     }
     
-    public void setRegistered_aid_arrays(String registered_aid) {
-        _registered_aid_arrays[0] = ByteArrayUtilities.hexToByteArray(registered_aid);
+    public void setRegisteredAID(byte [] registered_aid) {
+        _registered_aid = ByteArrayUtilities.byteArrayToHex(registered_aid);
     }
-
+    
+    public byte [] getAPDU() {
+        return ByteArrayUtilities.hexToByteArray(_apdu);
+    }
+    
+    public String getAPDUAsString() {
+        return _apdu;
+    }
+    
+    public void setAPDU(String apdu) {
+        _apdu = apdu;
+    }
+    
+    public void setAPDU(byte [] apdu) {
+        _apdu = ByteArrayUtilities.byteArrayToHex(apdu);
+    }
 }
