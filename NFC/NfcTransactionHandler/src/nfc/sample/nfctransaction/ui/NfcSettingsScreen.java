@@ -60,6 +60,9 @@ public class NfcSettingsScreen extends MainScreen {
     private LabelFieldColoured lbl_aid = new LabelFieldColoured("AID", Color.GREEN, Field.FIELD_LEFT);
     private EditField edt_aid = new EditField("","");
     
+    private LabelFieldColoured lbl_apdu = new LabelFieldColoured("APDU", Color.GREEN, Field.FIELD_LEFT);
+    private EditField edt_apdu = new EditField("","");
+    
     private ButtonField btn_save_settings = new ButtonField("Apply", ButtonField.CONSUME_CLICK);
     private SeparatorField separator = new SeparatorField();
     private LabelFieldColoured lbl_nfc_service_details = new LabelFieldColoured("NFC Service Details", Color.GREEN,
@@ -89,8 +92,11 @@ public class NfcSettingsScreen extends MainScreen {
         add(cbx_iso1443b);
         add(cbx_iso1443b_prime);
         add(lbl_aid);
-        edt_aid.setText(settings.getRegistered_aid());
+        edt_aid.setText(settings.getRegisteredAIDAsString());
         add(edt_aid);
+        add(lbl_apdu);
+        edt_apdu.setText(settings.getAPDUAsString());
+        add(edt_apdu);
         add(btn_save_settings);
         btn_save_settings.setChangeListener(listener);
         add(separator);
@@ -174,12 +180,14 @@ public class NfcSettingsScreen extends MainScreen {
         settings.setISO14443A(cbx_iso1443a.getChecked());
         settings.setISO14443B(cbx_iso1443b.getChecked());
         settings.setISO14443B_PRIME(cbx_iso1443b_prime.getChecked());
-        if (!settings.getRegistered_aid().equals(edt_aid.getText())) {
-            settings.setRegistered_aid(edt_aid.getText());
+        if (!settings.getRegisteredAIDAsString().equals(edt_aid.getText())) {
+            settings.setRegisteredAID(edt_aid.getText());
             CardEmulation ce = CardEmulation.getInstance();
             ce.removeTransactionListener();
             CardEmulation.registerTransactionListener(NfcTransHandlerApp.getTransactionListener());
         }
+        
+        settings.setAPDU(edt_apdu.getText());
 
         Utilities.log("XXXX " + Thread.currentThread().getName() + " Selected tech types="
                 + Utilities.getTechnologyTypesNames(tech_types));
