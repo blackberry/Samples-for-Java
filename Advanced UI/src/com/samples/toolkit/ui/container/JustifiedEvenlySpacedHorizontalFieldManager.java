@@ -46,7 +46,13 @@ public class JustifiedEvenlySpacedHorizontalFieldManager extends Manager
 
         // There may be a few remaining pixels after dividing up the space
         // we must split up the space between the first and last buttons
-        int fieldWidth = width / numFields;
+        
+        //if there are no fields the current fieldWidth should be 0
+        final int fieldWidth;
+        if (numFields == 0) 
+        	fieldWidth = 0;
+        else
+        	fieldWidth = width / numFields;
         int firstFieldExtra = 0;
         int lastFieldExtra = 0;
         
