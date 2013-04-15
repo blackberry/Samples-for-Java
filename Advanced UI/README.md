@@ -33,12 +33,12 @@ The sample code for this application is Open Source under the [Apache 2.0 Licens
 
 ## Contributing Changes
 
-Please see the [README](https://github.com/blackberry/BlackBerry-Java) of the BlackBerry-Java repository for instructions on how to add new Samples or make modifications to existing Samples.
+Please see the [README](https://github.com/blackberry/Samples-For-Java) of the BlackBerry-Java repository for instructions on how to add new Samples or make modifications to existing Samples.
 
 
 ## Bug Reporting and Feature Requests
 
-If you find a bug in a Sample, or have an enhancement request, simply file an [Issue](https://github.com/blackberry/BlackBerry-Java/issues) for the Sample and send a message (via github messages) to the Sample Author(s) to let them know that you have filed an [Issue](https://github.com/blackberry/BlackBerry-Java/issues).
+If you find a bug in a Sample, or have an enhancement request, simply file an [Issue](https://github.com/blackberry/Samples-For-Java/issues) for the Sample.
 
 
 ## Disclaimer
